@@ -4,6 +4,7 @@ import ProfessionalGrid from './components/ProfessionalGrid';
 import ProfessionalModal from './components/ProfessionalModal';
 import SearchFilters from './components/SearchFilters';
 import { professionalsData } from './data/professionalsData';
+import Footer from './components/Footer';
 
 function App() {
   const [professionals, setProfessionals] = useState(professionalsData);
@@ -18,16 +19,16 @@ function App() {
   });
 
   const filteredProfessionals = professionals.filter(professional => {
-    const matchesSearch = !searchTerm || 
+    const matchesSearch = !searchTerm ||
       professional.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       professional.position.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      professional.skills.some(skill => 
+      professional.skills.some(skill =>
         skill.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
     const matchesArea = !filters.area || professional.area === filters.area;
     const matchesCity = !filters.city || professional.city === filters.city;
-    const matchesTech = !filters.technology || 
+    const matchesTech = !filters.technology ||
       professional.technologies.includes(filters.technology);
 
     return matchesSearch && matchesArea && matchesCity && matchesTech;
@@ -53,11 +54,10 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${
-      darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
-    }`}>
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
+      }`}>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      
+
       <main className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">
@@ -94,6 +94,8 @@ function App() {
           />
         )}
       </main>
+      <Footer
+        darkMode={darkMode} />
     </div>
   );
 }
