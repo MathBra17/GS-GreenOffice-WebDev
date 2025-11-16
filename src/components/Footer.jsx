@@ -1,12 +1,16 @@
-function Footer() {
+import React from 'react';
+
+const Footer = ({darkMode}) => {
   return (
     <>
-      <footer className="bg-[#0d2818] text-white py-8">
+      <footer className={`${
+      darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+    } text-white py-8`}>
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             
             <div className="mb-4 md:mb-0">
-              <p className="text-lg font-semibold">GreenOffice</p>
+              <p className="text-lg font-semibold text-green-600">GreenOffice</p>
             </div>
 
             <div className="flex space-x-6">
@@ -25,7 +29,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-green-900 mt-6 pt-6 text-center text-gray-400">
+        <div className="border-t border-gray-700 mt-6 pt-6 text-center text-green-700">
           <p>&copy; 2025 GreenOffice. Todos os direitos reservados.</p>
         </div>
       </footer>
