@@ -8,9 +8,8 @@ const Header = ({ darkMode, toggleDarkMode }) => {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b shadow-sm transition-colors duration-300 ${
-        darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
-      }`}
+      className={`sticky top-0 z-50 border-b shadow-sm transition-colors duration-300 ${darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+        }`}
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
@@ -19,17 +18,17 @@ const Header = ({ darkMode, toggleDarkMode }) => {
             <h1 className="text-2xl font-bold">GreenOffice</h1>
           </div>
 
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 ml-auto mr-8">
             <Link
               to="/"
-              className="text-gray-600 hover:text-indigo-600"
+              className="text-gray-600 hover:text-green-600"
               onClick={toggleMobileMenu}
             >
               Home
             </Link>
             <Link
               to="/contribuidores"
-              className="text-gray-600 hover:text-indigo-600"
+              className="text-gray-600 hover:text-green-600"
               onClick={toggleMobileMenu}
             >
               Contribuidores
