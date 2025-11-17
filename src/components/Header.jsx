@@ -14,7 +14,7 @@ const Header = ({ darkMode, toggleDarkMode }) => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <img src="/folha.png" className="w-10 h-10 md:w-12 md:h-12" />
+            <img src="/logo.png" className="w-10 h-10 md:w-12 md:h-12" />
             <h1 className="text-2xl font-bold">GreenOffice</h1>
           </div>
 
