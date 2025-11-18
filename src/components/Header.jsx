@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Header = ({ darkMode, toggleDarkMode }) => {
+const Header = ({ darkMode, toggleDarkMode, user, onLogout }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const toggleMobileMenu = () => setMobileOpen(!mobileOpen);
@@ -41,10 +41,42 @@ const Header = ({ darkMode, toggleDarkMode }) => {
             </button>
 
             <button onClick={toggleDarkMode}>{darkMode ? "☀️" : "🌙"}</button>
+            {
+              user ? (
+                <div className="text-gray-600 hover:text-green-600">
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="w-8 h-8 rounded-full"
+                  />
+                </div>
+              )
+                :
+                <>
+                </>
+            }
+            {
+              user ?
+                <Link
+                  to="/"
+                  className="text-gray-600 hover:text-green-600"
+                  onClick={onLogout}
+                >
+                  <button className="px-4 py-2 rounded-lg font-semibold bg-red-600 text-white">
+                    Sair
+                  </button>
+                </Link> :
+                <Link
+                  to="/login"
+                  className="text-gray-600 hover:text-green-600"
+                  onClick={toggleMobileMenu}
+                >
+                  <button className="px-4 py-2 rounded-lg font-semibold bg-green-600 text-white">
+                    Entrar
+                  </button>
+                </Link>
+            }
 
-            <button className="px-4 py-2 rounded-lg font-semibold bg-green-600 text-white">
-              Entrar
-            </button>
           </div>
         </div>
       </div>

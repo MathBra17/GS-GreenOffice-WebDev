@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProfessionalGrid from "../components/ProfessionalGrid";
 import ProfessionalModal from "../components/ProfessionalModal";
 import SearchFilters from "../components/SearchFilters";
 import { professionalsData } from "../data/professionalsData";
 
-const Contribuidores = ({ darkMode }) => {
+const Contribuidores = ({ darkMode, user, onRecommendation }) => {
   const [professionals, setProfessionals] = useState(professionalsData);
   const [selectedProfessional, setSelectedProfessional] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,6 +14,18 @@ const Contribuidores = ({ darkMode }) => {
     city: "",
     technology: "",
   });
+
+  const [recomendation, setRecomendation] = useState([{
+    for: '',
+    to: ''
+  }])
+
+  useEffect(() => {
+    if (user) {
+      const withoutMe = professionals.filter((p) => p.id !== user.id)
+      setProfessionals(withoutMe)
+    }
+  }, [1])
 
   const filteredProfessionals = professionals.filter((professional) => {
     const matchesSearch =
@@ -33,6 +45,11 @@ const Contribuidores = ({ darkMode }) => {
     return matchesSearch && matchesArea && matchesCity && matchesTech;
   });
 
+  const handlerRecommendation = (from, to) => {
+    if (user) {
+      // desenvolvendo logica ..
+    }
+  };
   return (
     <>
       <div className="text-center mb-12">
@@ -66,6 +83,8 @@ const Contribuidores = ({ darkMode }) => {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           darkMode={darkMode}
+          onRecommend={handlerRecommendation}
+          me={user}
         />
       )}
     </>

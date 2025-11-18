@@ -1,21 +1,18 @@
-import React from 'react';
-
-const ProfessionalModal = ({ 
-  professional, 
-  isOpen, 
-  onClose, 
-  onRecommend, 
+const ProfessionalModal = ({
+  professional,
+  me,
+  isOpen,
+  onClose,
+  onRecommend,
   onSendMessage,
-  darkMode 
+  darkMode
 }) => {
   if (!isOpen) return null;
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
-      <div className={`relative max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-xl ${
-        darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
-      }`}>
-        
+      <div className={`relative max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-xl ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
+        }`}>
+
         {/* Header */}
         <div className="sticky top-0 z-10 p-6 border-b flex justify-between items-start backdrop-blur-sm bg-opacity-90">
           <div className="flex items-center space-x-4">
@@ -32,9 +29,8 @@ const ProfessionalModal = ({
           </div>
           <button
             onClick={onClose}
-            className={`p-2 rounded-full ${
-              darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
-            }`}
+            className={`p-2 rounded-full ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+              }`}
           >
             ✕
           </button>
@@ -71,11 +67,10 @@ const ProfessionalModal = ({
               {professional.technologies.map((tech, index) => (
                 <span
                   key={index}
-                  className={`px-3 py-2 rounded-lg ${
-                    darkMode 
-                      ? 'bg-blue-900 text-blue-200' 
+                  className={`px-3 py-2 rounded-lg ${darkMode
+                      ? 'bg-blue-900 text-blue-200'
                       : 'bg-blue-100 text-blue-800'
-                  } font-medium`}
+                    } font-medium`}
                 >
                   {tech}
                 </span>
@@ -90,11 +85,10 @@ const ProfessionalModal = ({
               {professional.softSkills.map((skill, index) => (
                 <span
                   key={index}
-                  className={`px-3 py-2 rounded-lg ${
-                    darkMode 
-                      ? 'bg-green-900 text-green-200' 
+                  className={`px-3 py-2 rounded-lg ${darkMode
+                      ? 'bg-green-900 text-green-200'
                       : 'bg-green-100 text-green-800'
-                  } font-medium`}
+                    } font-medium`}
                 >
                   {skill}
                 </span>
@@ -109,11 +103,10 @@ const ProfessionalModal = ({
               {professional.hobbies.map((hobby, index) => (
                 <span
                   key={index}
-                  className={`px-3 py-2 rounded-lg ${
-                    darkMode 
-                      ? 'bg-purple-900 text-purple-200' 
+                  className={`px-3 py-2 rounded-lg ${darkMode
+                      ? 'bg-purple-900 text-purple-200'
                       : 'bg-purple-100 text-purple-800'
-                  } font-medium`}
+                    } font-medium`}
                 >
                   {hobby}
                 </span>
@@ -124,22 +117,21 @@ const ProfessionalModal = ({
           {/* Botões de Ação */}
           <div className="flex space-x-4 pt-6 border-t">
             <button
-              onClick={() => onRecommend(professional.id)}
-              className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-colors ${
-                darkMode 
-                  ? 'bg-green-600 hover:bg-green-700 text-white' 
+              //onClick={() => onRecommend(professional.id)}
+              onClick={() => onRecommend(me.id, professional.id)}
+              className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-colors ${darkMode
+                  ? 'bg-green-600 hover:bg-green-700 text-white'
                   : 'bg-green-500 hover:bg-green-600 text-white'
-              }`}
+                }`}
             >
               👍 Recomendar Profissional
             </button>
             <button
               onClick={() => onSendMessage(professional.id)}
-              className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-colors ${
-                darkMode 
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+              className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-colors ${darkMode
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
                   : 'bg-blue-500 hover:bg-blue-600 text-white'
-              }`}
+                }`}
             >
               💬 Enviar Mensagem
             </button>
