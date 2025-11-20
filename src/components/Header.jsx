@@ -33,6 +33,22 @@ const Header = ({ darkMode, toggleDarkMode, user, onLogout }) => {
             >
               Contribuidores
             </Link>
+            {
+              user ? (
+                <>
+                  <Link
+                    to="/mensagens"
+                    className="text-gray-600 hover:text-green-600"
+                    onClick={toggleMobileMenu}
+                  >
+                    Mensagens
+                  </Link>
+                </>
+              )
+                :
+                <>
+                </>
+            }
           </nav>
 
           <div className="flex items-center space-x-4">

@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Contribuidores from "./pages/Contribuidores";
 import Login from "./pages/Login";
+import Mensagens from "./pages/Mensagens";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -37,6 +38,10 @@ function App() {
             <Route
               path="/login"
               element={<Login darkMode={darkMode} onLogin={handlerLogin} />}
+            />
+            <Route
+              path="/mensagens"
+              element={<Mensagens darkMode={darkMode} onLogin={handlerLogin} />}
             />
           </Routes>
         </main>

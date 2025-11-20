@@ -1,3 +1,6 @@
+import MessageModal from "./MensagemModal";
+import React, { useState } from 'react';
+
 const ProfessionalModal = ({
   professional,
   me,
@@ -5,8 +8,28 @@ const ProfessionalModal = ({
   onClose,
   onRecommend,
   onSendMessage,
-  darkMode
+  darkMode,
+  recomendations,
 }) => {
+  function funcaoPrivada() {
+    const result = recomendations.filter((r) => (
+      r.to == professional.id
+    ))
+    console.log(result)
+  }
+
+  const [showMessageModal, setShowMessageModal] = useState(false);
+
+  const handleSendMessageClick = () => {
+    setShowMessageModal(true);
+  };
+
+  const handleMessageSent = () => {
+    setShowMessageModal(false);
+    if (onSendMessage) {
+      onSendMessage(professional.id);
+    }
+  };
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
@@ -68,8 +91,8 @@ const ProfessionalModal = ({
                 <span
                   key={index}
                   className={`px-3 py-2 rounded-lg ${darkMode
-                      ? 'bg-blue-900 text-blue-200'
-                      : 'bg-blue-100 text-blue-800'
+                    ? 'bg-blue-900 text-blue-200'
+                    : 'bg-blue-100 text-blue-800'
                     } font-medium`}
                 >
                   {tech}
@@ -86,8 +109,8 @@ const ProfessionalModal = ({
                 <span
                   key={index}
                   className={`px-3 py-2 rounded-lg ${darkMode
-                      ? 'bg-green-900 text-green-200'
-                      : 'bg-green-100 text-green-800'
+                    ? 'bg-green-900 text-green-200'
+                    : 'bg-green-100 text-green-800'
                     } font-medium`}
                 >
                   {skill}
@@ -104,8 +127,8 @@ const ProfessionalModal = ({
                 <span
                   key={index}
                   className={`px-3 py-2 rounded-lg ${darkMode
-                      ? 'bg-purple-900 text-purple-200'
-                      : 'bg-purple-100 text-purple-800'
+                    ? 'bg-purple-900 text-purple-200'
+                    : 'bg-purple-100 text-purple-800'
                     } font-medium`}
                 >
                   {hobby}
@@ -114,23 +137,36 @@ const ProfessionalModal = ({
             </div>
           </section>
 
+          <section>
+            <h3 className="text-xl font-semibold mb-4">Quantidade de recomendações</h3>
+            <div className="flex flex-wrap gap-2" onClick={() => funcaoPrivada()}>
+              {
+                recomendations.filter((r) => (
+                  r.to == professional.id
+                )).length
+              } recomendações
+            </div>
+          </section>
+
           {/* Botões de Ação */}
           <div className="flex space-x-4 pt-6 border-t">
             <button
-              //onClick={() => onRecommend(professional.id)}
+              disabled={!me.id}
               onClick={() => onRecommend(me.id, professional.id)}
               className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-colors ${darkMode
-                  ? 'bg-green-600 hover:bg-green-700 text-white'
-                  : 'bg-green-500 hover:bg-green-600 text-white'
+                ? 'bg-green-600 hover:bg-green-700 text-white'
+                : 'bg-green-500 hover:bg-green-600 text-white'
                 }`}
             >
               👍 Recomendar Profissional
             </button>
             <button
-              onClick={() => onSendMessage(professional.id)}
+              disabled={!me.id}
+              // onClick={() => onSendMessage(professional.id)}
+              onClick={handleSendMessageClick}
               className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-colors ${darkMode
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'bg-blue-500 hover:bg-blue-600 text-white'
+                ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                : 'bg-blue-500 hover:bg-blue-600 text-white'
                 }`}
             >
               💬 Enviar Mensagem
@@ -138,6 +174,12 @@ const ProfessionalModal = ({
           </div>
         </div>
       </div>
+      {showMessageModal && (
+        <MessageModal
+          professional={professional} me={me} darkMode={darkMode} isOpen={showMessageModal}
+          onClose={() => setShowMessageModal(false)}
+        />
+      )}
     </div>
   );
 };

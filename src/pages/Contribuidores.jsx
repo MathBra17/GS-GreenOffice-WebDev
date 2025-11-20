@@ -16,16 +16,28 @@ const Contribuidores = ({ darkMode, user, onRecommendation }) => {
   });
 
   const [recomendation, setRecomendation] = useState([{
-    for: '',
-    to: ''
+    from: '0',
+    to: '0'
   }])
 
   useEffect(() => {
+    const recomends = localStorage.getItem('greenoffice_recommendations')
+    if (recomends) {
+      setRecomendation(JSON.parse(recomends))
+    } else if (recomends == null) {
+      const init = [{ from: '', to: '' }]
+      localStorage.setItem("greenoffice_recommendations", JSON.stringify(init))
+    }
     if (user) {
       const withoutMe = professionals.filter((p) => p.id !== user.id)
       setProfessionals(withoutMe)
     }
   }, [1])
+
+  useEffect(() => {
+    if (recomendation[0].from !== '0' && recomendation[0].to !== '0')
+      localStorage.setItem("greenoffice_recommendations", JSON.stringify(recomendation))
+  }, [recomendation])
 
   const filteredProfessionals = professionals.filter((professional) => {
     const matchesSearch =
@@ -47,7 +59,12 @@ const Contribuidores = ({ darkMode, user, onRecommendation }) => {
 
   const handlerRecommendation = (from, to) => {
     if (user) {
-      // desenvolvendo logica ..
+      const result = recomendation.filter((r) => {
+        return r.from == from && r.to == to
+      })
+      if (result.length == 0) {
+        setRecomendation([...recomendation, { from: from, to: to }])
+      }
     }
   };
   return (
@@ -85,6 +102,7 @@ const Contribuidores = ({ darkMode, user, onRecommendation }) => {
           darkMode={darkMode}
           onRecommend={handlerRecommendation}
           me={user}
+          recomendations={recomendation}
         />
       )}
     </>
